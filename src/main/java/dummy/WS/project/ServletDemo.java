@@ -56,6 +56,7 @@ public class ServletDemo extends HttpServlet {
 		if(!errorHasBeenWritten) {
 			response.getWriter().print("Answer is: "+ answer);
 		}
+		errorHasBeenWritten = false;
 	}
 
 	/**
