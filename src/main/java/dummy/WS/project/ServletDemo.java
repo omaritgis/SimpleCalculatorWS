@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ServletDemo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpServletResponse response;
+	private boolean errorHasBeenWritten;
 
     /**
      * Default constructor. 
@@ -52,7 +53,9 @@ public class ServletDemo extends HttpServlet {
 		}
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String answer = Double.toString(result).contentEquals("Infinity") ? "Status code: " + triggerErrorhandling("Division by zero not allowed!", 2) : Double.toString(result);
-		response.getWriter().print("Answer is: "+ answer);
+		if(!errorHasBeenWritten) {
+			response.getWriter().print("Answer is: "+ answer);
+		}
 	}
 
 	/**
@@ -64,7 +67,8 @@ public class ServletDemo extends HttpServlet {
 	
 	public int triggerErrorhandling(String errorMessage, int statusCode) throws IOException {
 		response.getWriter().print(errorMessage + " " + ErrorMessages.error(statusCode));
-		return 0;
+		errorHasBeenWritten = true;
+		return statusCode;
 	}
 
 }
