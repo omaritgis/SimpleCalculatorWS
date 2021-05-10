@@ -44,14 +44,15 @@ public class ServletDemo extends HttpServlet {
 			result = d.testSubtraction(num1, num2) == 0 ? num1 + num2 : triggerErrorhandling("Try again with different numbers", d.statusCode);
 			break;
 		case "multiplication":
-			result = d.testSubtraction(num1, num2) == 0 ? num1 * num2 : triggerErrorhandling("Try again with different numbers", d.statusCode);
+			result = d.testMultiplication(num1, num2) == 0 ? num1 * num2 : triggerErrorhandling("Try again with different numbers", d.statusCode);
 			break;
 		case "division":
-			result = d.testSubtraction(num1, num2) == 0 ? num1 / num2 : triggerErrorhandling("Try again with different numbers",d.statusCode);
+			result = d.testDivision(num1, num2) == 0 ? num1 / num2 : triggerErrorhandling("Try again with different numbers",d.statusCode);
 			break;
 		}
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.getWriter().print("Answer is: "+ result);
+		String answer = Double.toString(result).contentEquals("Infinity") ? "Status code: " + triggerErrorhandling("Division by zero not allowed!", 2) : Double.toString(result);
+		response.getWriter().print("Answer is: "+ answer);
 	}
 
 	/**

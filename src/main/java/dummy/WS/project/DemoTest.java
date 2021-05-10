@@ -98,8 +98,9 @@ public class DemoTest {
 			Object d = num1/num2;
 //			Assert.assertTrue(d instanceof Number);
 			statusCode = d instanceof Number ? 0 : 1;
+			
 		}catch(Exception e) {
-			statusCode = 2; //Logical error, should catch division by 0
+			statusCode = 2; //Logical error
 //			Assert.fail();
 		}
 		return statusCode;
